@@ -124,5 +124,77 @@ The problem is that for WebRTC to work,you need a signaling-server anyway which 
 
 ## Limitations of the technologies
 
+### Sending Datas in both directions
 
+Only WebSockets and WebTransport allow to send data in both directions so that you can receive server-data and send client-data over the same connection.
+
+While it would also be possible with Long-Polling in theory,it is not recommended because sending "new" data to an existing long-polling connection would require to do an additional http-request anyway. So instead of doing that you can send data directly from the client to the server with an additional http-request without interrupting the long-polling connection.
+
+Server-Sent-Events do not support sending any additional data to the server.You can only do the initial request, and even there you cannot send POST-like data in the http-body by default with the native [EventSource API](https://developer.mozilla.org/en-US/docs/Web/API/EventSource). Instead you have to put all data inside of the url parameters which is considered a bad practice for security because credentials might leak into server logs,proxies and caches.To fix this problem,you can use the [eventsource polyfill](https://github.com/EventSource/eventsource) instead of the native EventSource API. This library adds additional functionality like sending custom http headers.
+
+### 6-Requests per Domain limit
+
+Most modern browsers allow six connections per domain which limits the usability of all steady server-to-client messaging methods. The limitation of six connection is even shared across browser tabs so when you open the same page in multiple tabs,they would have to shared the six-connection-pool with each other. This limitation is part of the HTTP/1.1-RFC
+
+While that policy makes sense to prevent website owners from using their visitors to D-DOS other websites,it can be a big problem when multiple connections are required to handle server-client communication for legitimate use cases. To workaround the limitation you have to use HTTP/2 or HTTP/3 with which the browser will only open a single connection per domain and then use multiplexing to run all data through a single connection. While this gives you a virtually infinity amount of parallel connections,there is a [SETTINGS_MAX_CONCURRENT_STREAMS](https://www.rfc-editor.org/rfc/rfc7540#section-6.5.2) setting which limits the actually connection amount. The default is 100 concurrent streams for most configurations.
+
+In theory the connection limit could also be increased by the browser,at least for specific APIs like EventSource, but the issues have beem marked as "won't fix" by chromium and firefox.
+
+Something need attention is that when you build a browser application, you have to assume that your users will use the app not only once,but in multiple browser tabs in parallel. By default you likely will open one server-stream-connection per tab which is often not necessary at all. Instead you open only a single connection and shared it between tabs, no matter how many tabs are open. You can achieve this by the [broadcast-channel npm package](https://github.com/pubkey/broadcast-channel),this package supplies you a method to communication between tabs.
+
+### Connection are not kept open on mobile apps
+
+In the context of mobile applications running on operating systems like Android and IOS,maintaining open connections,such as those used for WebSockets and the others,poses a significant challenge. Mobile operating systems are designed to automatically move applications into the background after a certain period of inactivity,effectively closing any open connections. This behavior is a part of the operating system's resource management strategy to conserve battery and optimize performance. As a result, developers often rely on mobile push notifications as an efficient and reliable method to send data from servers to clients. Push notifications allow servers to alert the application of new data,prompting an actor or update, without the need for a persistent open connection.
+
+### Proxies and Firewalls
+
+In enterprise network environments,it is often hard to implement a WebSocket server into the infrastructure because many proxies and firewalls block non-HTTP connections. Therefore using the Server-Sent-Events provides and easier way of enterprise integration. Also long-polling uses only plain HTTP-requests and might be an option.
+
+## Performance Comparison
+
+Comparing the performance of WebSockets, Server-Sent Events,Long-Polling and WebTransport directly involves evaluating key aspects such as latency,throughput, server load,and scalability under various conditions.
+
+First lets look at the raw numbers.A good of performance comparison can be found in [this repository](https://github.com/Sh3b0/realtime-web?tab=readme-ov-file#demos) which tests the messages times in a go lang server implementation. Here we can see that the performance of WebSockets, WebRTC and WebTransport are comparable.
+
+### Latency
+* WebSockets: Offers the lowest latency due to its full-duplex communication over a single,persistent connection.Ideal for real-time applications where immediate data exchange is critical.
+* Server-Sent Events: Also provides low latency for server-to-client communication but cannot natively send messages back to the server without additional HTTP requests.
+* Long-Polling: Incurs higher latency as it relies on establishing new HTTP connections for each data transmission,making it less efficient for real-time updates. Also it can occur that the server wants to send an event when the client is still in the process of opening a new connection. In these cases the latency would be significantly larger.
+* WebTransport: Promises to offer low latency similar to WebSockets, with the added benefits of leveraging the HTTP/3 protocol for more efficient multiplexing and congestion control.
+
+### Throughput
+
+* WebSockets: Capable of high throughput due to its persistent connection,but throughtput can suffer from backpressure where the client connot process data as fast as the server is capable of sending it.
+* Server-Sent Events: Efficient for broadcasting messages to many clients with less overhead than WebSockets,leading to potentially higher throughput for unidirectional server-to-client communication.
+* Long-Polling: Generally offers lower throughput due to the overhead of frequently opening and closing connections,which consumes more server resources.
+* WebTransport: Expected to support high throughput for both unidirectional and bidirectional streams within a single connection,outperforming WebSockets in scenarios requiring multiple streams.
+
+### Scalability and Server Load
+
+* WebSockets: Maintaining a large number of WebSocket connections can significantly increase server load,potentially affecting scalability for applications with many users.
+* Server-Sent Events: More scalable for scenarios that primarily require updates from server to client,as it uses less connection overhead than WebSockets because it uses "normal" HTTP request without things like [protocol updates](https://developer.mozilla.org/en-US/docs/Web/HTTP/Protocol_upgrade_mechanism) that have to be run with WebSockets.
+* Long-Polling: The least scalable due to the high server load generated by frequent connection establishment,making it suitable only as a fallback mechanism.
+* WebTransport: Designed to be highly scalable,benefiting from HTTP/3's efficiency in handling connections and streams,potentially reducing server load compared to WebSockets and SSE.
+
+## Recommendations and Use-Case Suitability
+
+In the landscape of server-client communication technologies, each has its distinct advantages and use case suitability. Server-Sent Events(SSE) emerge as the most straightforward option to implement,leveraging the same HTTP/S protocols as traditional web requests,thereby circumventing corporate firewall restrictions and other technical problems that can appear with other protocols. They are easily integrated into Node.js and other server frameworks,making them an ideal choice for applications requiring frequent server-to-client updates,such as news feeds,stock tickers,and live event streaming.
+
+On the other hand,WebSockets excel in scenarios demanding ongoing,two-way communication. Their ability to support continuous interaction makes them the prime choice for browser games,chat applications,and live sports updates.
+
+However,WebTransport,despite its potential,faces adoption challenges.It is not widely supported by server frameworks including Node.js and lacks compatibility with safari. Moreover,its reliance on HTTP/3 further limits its immediate applicability because many WebServers like nginx only have experimental HTTP/3 support. While promising for future applications with its support for both reliable and unreliable data transmission,WebTransport is not yet a viable option for most use cases.
+
+Long-Polling, once a common technique,is now largely outdated due to its inefficiency and the high overhead of repeatedly establishing new HTTP connection. Although it may serve as a fallback in environments lacking support for WebSockets or SSE,its use is generally discouraged due to significant performance limitations.
+
+## Known Problems
+
+For all of the realtime streaming technologies,there are known problems. When you build anything on top of them,keep these in mind.
+
+### A client can miss out events when reconnecting
+
+When a client is connecting,reconnecting or offline,it can miss out events that happened on the server but could not be streamed to the client. This missed out events are not relevant when the server is streaming the full content each time anyway,like on a live updating stock ticker. But when the backend is made to stream partial results,you have to account for missed out events. Fixing that on the backend scales pretty bad because the backend would have to remember for each client which events have been successfully send already. Instead this could be implemented with client side logic.
+
+### Company firewalls can cause problems
+
+There are many known problems with company infrastructure when using any of the streaming technologies. Proxies and firewall can block traffic or unintentionally break requests and responses. Whenever you implement a realtime app in such an infrastructure,make sure you first test out if the technology itself works for you.
 
