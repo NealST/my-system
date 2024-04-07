@@ -29,5 +29,4 @@ In a project opened in vscode, you can start debugging by adding some configurat
 
 The basic principle is similar to chrome devtool. But there exists some differences that vscode debugger need extra adaptor to process a variety of programing language.
 
-
-
+![](https://github.com/NealST/my-system/assets/17682407/1ba4ef4e-79d2-4224-86d4-f6dfebc20fc2)
