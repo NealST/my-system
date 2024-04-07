@@ -8,6 +8,6 @@ As a developer,bug is something unavoidable for us. To solve those bugs effectiv
 
 Chrome devtools is composed of four parts, explained by following graph:
 
-
+![](https://github.com/NealST/my-system/assets/17682407/cc6077c5-8eef-4236-a79e-f9438d4bff03)
 
 ### VSCode Debugger
