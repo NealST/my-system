@@ -26,5 +26,10 @@ https://react-spring.dev/, it's an outstanding library to help you build interac
 
 https://adazzle.github.io/react-data-grid/#/common-features, it's a react library to enable you build a grid display with millons of data in a way of great performance.
 
+## Pragmatic drag and drop
 
+https://atlassian.design/components/pragmatic-drag-and-drop/about, it's a performance focused drag and drop library that can be used to power any drag and drop experience on any tech stack. Pragmatic drag and drop makes working with the browsers powerful and flexible built in drag and drop functionality safe and easy.
 
+## Microdiff
+
+https://github.com/AsyncBanana/microdiff, it's a fast, zero dependency object and array comparison library.Significantly faster than most other deep comparison libraries and has full Typescript support.
