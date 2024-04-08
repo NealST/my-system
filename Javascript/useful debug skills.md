@@ -30,3 +30,66 @@ In a project opened in vscode, you can start debugging by adding some configurat
 The basic principle is similar to chrome devtool. But there exists some differences that vscode debugger need extra adaptor to process a variety of programing language.
 
 ![](https://github.com/NealST/my-system/assets/17682407/1ba4ef4e-79d2-4224-86d4-f6dfebc20fc2)
+
+## Breakpoint Debugging
+
+Add breakpoint is a common way to pause the execument of a program, but normal breakpoint is not satisfied in some cases like exceptions. We need some other types of breakpoint to help us.
+
+### Exception Breakpoint
+
+you can use it like this:
+![]()
+
+it will pause the program at the place of throwing exception. If you want to locate the exception quickly, this type of breakpoint is very helpful.
+
+### Condition Breakpoint
+
+It will pause the program when meeting some conditions. You can use it like this:
+
+It's useful in some scenarios that we want to control the execution of the program without modifying the code and rerun the app.
+
+### Log Breakpoint
+
+It's similar to 'console.log' which is useful to print the value of some variables but we do not need to write a 'console.log' expression in our codebase.
+
+### EventListener Breakpoint
+
+If we want to pause the program after some events are fired but we hate to cost time to find the concret code that processing the event, eventListener breakpoint will be a good choice. It's able to manage the global event.
+
+### URL Request Breakpoint
+
+This type of breakpoint has ability to pause the program before sending a url request. So it's useful for us to modify the request body to verify some assumptions,which will boost our productivity when coordinating with the backend.
+
+### DOM Breakpoint
+
+It will pause the program when a dom is removed or some attributes are changed. It's useful for us in some scenarios that we directly manipulate the dom.
+
+## Chrome Devtools Skills
+
+### Using function keys to change 'px' value
+
+Aside from using the key '↑' or '↓' to add or subtract one, we can use these function keys to change value quickly.
+
+* cmd + ↑/↓: add or descrease value per 100
+* shift + ↑/↓: add or decrease value per 10
+* option + ↑/↓: add or decrease value per 0.1
+
+### Switch color quickly
+
+You could select and switch color quickly by using 'shift' key:
+
+### Check the request initiator
+
+In network panel of chrome devtools, you could 
+have an insight for the call stack of every network request through the initiator tab like this:
+
+So we can locate the code efficiently.
+
+### Filter requests
+
+If we have the desire to find a concret request in our website, other than keywords, the filter is also a nice method. All we need to do is pressing the ctrl + space compose key, when adding a '-' prefix before the filter, we can toggle the filter result, it's equal to click the invert checkbox.
+
+
+### Ignore some scripts in stack
+
+When we debug the program step by step, we may step into some common libaries such as react, but we just care about the code of ourselves. At this time, we could press the right button of the mouse to add the library script to ignore list.
