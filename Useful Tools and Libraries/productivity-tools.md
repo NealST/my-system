@@ -25,3 +25,9 @@ https://github.com/microsoft/codetour, it's a vscode extension that allows you t
 ## Tinybench
 
 https://github.com/tinylibs/tinybench, it's a simple, tiny and lightweight benchmarking library.
+
+## Preview.js
+
+https://previewjs.com/, it's able to help us preview the components in our IDE, includes Vscode, JetBrains IDEs. It supports many frameworks such as Preact, React, SolidJS, Svelte and Vue.
+
+

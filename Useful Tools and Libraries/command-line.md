@@ -4,6 +4,12 @@ This article describes some useful tools and libraries that could boost your pro
 
 ## Meow
 
-https://github.com/sindresorhus/meow, it's a helper
+https://github.com/sindresorhus/meow, it's a cli app helper
+
+## ZX
+
+https://github.com/google/zx/tree/8.0.0, it's a very convenient library to help you write better scripts.
+
+
 
 
