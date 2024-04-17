@@ -30,4 +30,11 @@ https://github.com/tinylibs/tinybench, it's a simple, tiny and lightweight bench
 
 https://previewjs.com/, it's able to help us preview the components in our IDE, includes Vscode, JetBrains IDEs. It supports many frameworks such as Preact, React, SolidJS, Svelte and Vue.
 
+## Sequel Ace
+
+https://apps.apple.com/cn/app/sequel-ace/id1518036000?l=en-GB&mt=12, it's a fast, free, easy-to-use Mac database management application for working with MySQL.
+
+## OpenTelemetry
+
+https://opentelemetry.io/, it's a collection of APIs,SDKs,and tools. Use it to instrument,generate,collect,and export telemetry data(metrics, logs and traces) to help you analyze your software's performance and behavior.
 
