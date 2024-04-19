@@ -33,3 +33,7 @@ https://atlassian.design/components/pragmatic-drag-and-drop/about, it's a perfor
 ## Microdiff
 
 https://github.com/AsyncBanana/microdiff, it's a fast, zero dependency object and array comparison library.Significantly faster than most other deep comparison libraries and has full Typescript support.
+
+## Pino
+
+https://github.com/pinojs/pino/issues, a super fast and all natural json logger for node.js
