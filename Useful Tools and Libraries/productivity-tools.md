@@ -38,3 +38,6 @@ https://apps.apple.com/cn/app/sequel-ace/id1518036000?l=en-GB&mt=12, it's a fast
 
 https://opentelemetry.io/, it's a collection of APIs,SDKs,and tools. Use it to instrument,generate,collect,and export telemetry data(metrics, logs and traces) to help you analyze your software's performance and behavior.
 
+## Madge
+
+https://github.com/pahen/madge, it's a tool for generating a visual graph for you module dependencies, which will be very useful in finding circular dependencies.

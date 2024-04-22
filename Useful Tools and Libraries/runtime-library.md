@@ -37,3 +37,7 @@ https://github.com/AsyncBanana/microdiff, it's a fast, zero dependency object an
 ## Pino
 
 https://github.com/pinojs/pino/issues, a super fast and all natural json logger for node.js
+
+## Modern-errors
+
+https://github.com/ehmicky/modern-errors, it's a library to do you a great favor that handle errors in a simple,stable,consistent way.
