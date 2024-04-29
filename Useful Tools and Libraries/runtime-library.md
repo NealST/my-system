@@ -41,3 +41,17 @@ https://github.com/pinojs/pino/issues, a super fast and all natural json logger 
 ## Modern-errors
 
 https://github.com/ehmicky/modern-errors, it's a library to do you a great favor that handle errors in a simple,stable,consistent way.
+
+## React-phone-number-input
+
+https://catamphetamine.gitlab.io/react-phone-number-input/, it's an international phone number \<input /> for React
+
+## Jazz.js for MIDI
+
+https://jazz-soft.net/doc/JZZ/, jazz.js is a javascript MIDI library,it works with Node.js and all major browsers.
+
+## Svelte-dnd-action
+
+https://github.com/isaacHagoel/svelte-dnd-action, it is a feature-complete implementation of drag and drop for Svelte using a custom action.
+
+
