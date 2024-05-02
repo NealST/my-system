@@ -54,4 +54,21 @@ https://jazz-soft.net/doc/JZZ/, jazz.js is a javascript MIDI library,it works wi
 
 https://github.com/isaacHagoel/svelte-dnd-action, it is a feature-complete implementation of drag and drop for Svelte using a custom action.
 
+## Google APIs Node.js Client
+
+https://github.com/googleapis/google-api-nodejs-client, Node.js client library for using Google APIs. Support for authorization and authentication with OAuth 2.0, API Keys and JWT tokens is included.
+
+## Perfect arrows
+
+https://github.com/steveruizok/perfect-arrows, it is a set of functions for drawing perfect arrows between points and shapes.
+
+## Primereact
+
+https://github.com/primefaces/primereact, PrimeReact is a rich set of open source UI Components for React, even you can say that it is the Most Complete React UI Component Library.
+
+## Typical for Typing in
+
+https://github.com/camwiegert/typical, it is an animated typing in library, just ~400 bytes 🐡 of JavaScript.
+
+
 

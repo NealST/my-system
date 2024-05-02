@@ -41,3 +41,33 @@ https://opentelemetry.io/, it's a collection of APIs,SDKs,and tools. Use it to i
 ## Madge
 
 https://github.com/pahen/madge, it's a tool for generating a visual graph for you module dependencies, which will be very useful in finding circular dependencies.
+
+## SST for AWS
+
+https://github.com/sst/sst, it make it easy to build modern full-stack applications on AWS.
+
+## Wish for SSH
+
+https://github.com/charmbracelet/wish, it is an SSH server with sensible defaults and a collection of middlewares that makes building SSH apps really easy.
+
+## Sherlock for Social Media
+
+https://github.com/sherlock-project/sherlock, it can hunt down social media accounts by username across social networks.
+
+## Shields for Badges
+
+https://github.com/badges/shields?tab=readme-ov-file, it's a service for concise, consistent, and legible badges in SVG and raster format, which can easily be included in GitHub readmes or any other web page.
+
+## Responsive-app devtools
+
+https://github.com/responsively-org/responsively-app, it is a modified web browser that helps in responsive web development. A web developer's must have dev-tool.
+
+## QuickRecorder
+
+https://github.com/lihaoyun6/QuickRecorder, it is a lightweight screen recorder based on ScreenCapture Kit for macOS.
+
+## Chrome-Extension-Cli
+
+https://github.com/dutiyesh/chrome-extension-cli, it is a useful cli tool to help you develop your next chrome extension.
+
+
